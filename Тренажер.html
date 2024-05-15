@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренажер для глаз</title>
+    <style>
+        body,
+        html {
+            height: 300vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider1 {
+            position: relative;
+            width: 10px;
+            height: 90vh;
+            border-radius: 5px;
+            background-color: #C40C0C;
+            margin: 5vh;
+        }
+
+        .slider2 {
+            position: relative;
+            width: 90vh;
+            height: 10px;
+            border-radius: 5px;
+            background-color: #FF6500;
+            margin: 5vh;
+        }
+
+        .slider3 {
+            position: relative;
+            width: 90vh;
+            height: 90vh;
+            border-radius: 5px;
+            border: #FF8A08 solid 10px;
+            margin: 5vh;
+        }
+
+        .handle3 {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: #FF8A08;
+            border-radius: 50%;
+            animation-duration: 6s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-name: work3;
+        }
+
+        .handle1 {
+            position: absolute;
+            top: 0%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: #C40C0C;
+            border-radius: 50%;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-name: work1;
+        }
+
+        .handle2 {
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: #FF6500;
+            border-radius: 50%;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-name: work2;
+        }
+
+        .empty {
+            position: relative;
+            margin: 5vh;
+        }
+
+        @keyframes work1 {
+            0% {
+                top: 0%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        @keyframes work2 {
+            0% {
+                left: 0%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes work3 {
+            0% {
+                top: -5px;
+                left: -5px;
+            }
+
+            25% {
+                left: calc(100% + 5px);
+                top: -5px;
+            }
+
+            50% {
+                left: calc(100% + 5px);
+                ;
+                top: calc(100% + 5px);
+                ;
+            }
+
+            75% {
+                left: -5px;
+                top: calc(100% + 5px);
+            }
+
+            100% {
+                top: -5px;
+                left: -5px;
+            }
+        }
+
+        .hud {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .hud button {
+            margin-bottom: 10px;
+            position: relative;
+            padding: 10px 22px;
+            border-radius: 6px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            background-color: #7d2ae8;
+            transition: all 0.2s ease;
+        }
+
+        .hud button:active {
+            transform: scale(0.96);
+        }
+
+        .hud button:before,
+        .hud button:after {
+            position: absolute;
+            content: "";
+            width: 150%;
+            left: 50%;
+            height: 100%;
+            transform: translateX(-50%);
+            z-index: -1000;
+            background-repeat: no-repeat;
+        }
+
+        .hud button:hover:before {
+            top: -70%;
+            background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, transparent 20%, #7d2ae8 20%, transparent 30%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+            background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+                10% 10%, 18% 18%;
+            background-position: 50% 120%;
+            animation: greentopBubbles 0.6s ease;
+        }
+
+        @keyframes greentopBubbles {
+            0% {
+                background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+                    40% 90%, 55% 90%, 70% 90%;
+            }
+
+            50% {
+                background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+                    50% 50%, 65% 20%, 90% 30%;
+            }
+
+            100% {
+                background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+                    50% 40%, 65% 10%, 90% 20%;
+                background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+            }
+        }
+
+        .hud button:hover::after {
+            bottom: -70%;
+            background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+                radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+            background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+            background-position: 50% 0%;
+            animation: greenbottomBubbles 0.6s ease;
+        }
+
+        @keyframes greenbottomBubbles {
+            0% {
+                background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+                    70% -10%, 70% 0%;
+            }
+
+            50% {
+                background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+                    105% 0%;
+            }
+
+            100% {
+                background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+                    110% 10%;
+                background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hud">
+        <button onclick="scrollToSection(1)">1</button>
+        <button onclick="scrollToSection(2)">2</button>
+        <button onclick="scrollToSection(3)">3</button>
+    </div>
+    <div class="slider1" id="section1">
+        <div class="handle1"></div>
+    </div>
+    <div class="empty" id="section2" style="height: 40vh"></div>
+    <div class="slider2">
+        <div class="handle2"></div>
+    </div>
+    <div class="empty" style="height: 40vh;"></div>
+    <div class="empty" style="height: 5vh;"></div>
+    <div class="slider3" id="section3">
+        <div class="handle3"></div>
+    </div>
+    <script>
+        function scrollToSection(sectionNum) {
+            var sectionId = "section" + sectionNum;
+            var section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>
